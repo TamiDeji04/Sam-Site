@@ -88,7 +88,8 @@ export const siteConfig: SiteConfig = {
   contactCopy:
     'For bookings, collaborations, or questions, send an email and Samuel will get back to you.',
   email: 'Samshotit@gmail.com',
-  instagramLabel: 'Instagram coming soon',
+  instagramLabel: '@sam.shot.it_',
+  instagramUrl: 'https://www.instagram.com/sam.shot.it_?igsh=MTE5em5hdXFrNGlzaw==',
   heroImageId: '33',
   focusAreas: ['Portraits', 'Beauty', 'Events'],
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://example.com',
