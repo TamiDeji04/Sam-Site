@@ -80,7 +80,7 @@ export const siteConfig: SiteConfig = {
   ],
   aboutHeading: 'About Samuel',
   aboutBody:
-    'Samuel Oluwasanmi is the photographer behind Samshotit. His work leans clean, calm, and personal, with an eye for portraits, beauty details, and moments that still feel true to the people in them.',
+    'My name is Samuel Oluwasanmi, I am a photographer. This passion for photography started when I was a teenager. After discovering this passion of mine, I decided to hone my skills, and use it to help capture the best moments for others and myself. This process includes building a relationship with my client, where they feel comfortable and confident in these beautiful moments.',
   contactHeading: "Let's talk about your shoot.",
   contactCopy:
     'For bookings, collaborations, or questions, send an email and Samuel will get back to you.',
