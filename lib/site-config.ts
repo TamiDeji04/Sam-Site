@@ -17,7 +17,7 @@ export type SiteConfig = {
     body: string;
   }>;
   aboutHeading: string;
-  aboutBody: string;
+  aboutBody: string[];
   contactHeading: string;
   contactCopy: string;
   email: string;
@@ -79,8 +79,11 @@ export const siteConfig: SiteConfig = {
     },
   ],
   aboutHeading: 'About Samuel',
-  aboutBody:
-    'My name is Samuel Oluwasanmi, I am a photographer. This passion for photography started when I was a teenager. After discovering this passion of mine, I decided to hone my skills, and use it to help capture the best moments for others and myself. This process includes building a relationship with my client, where they feel comfortable and confident in these beautiful moments.',
+  aboutBody: [
+    'My name is Samuel Oluwasanmi, I am a photographer. This passion for photography started when I was a teenager.',
+    'After discovering this passion of mine, I decided to hone my skills, and use it to help capture the best moments for others and myself.',
+    'This process includes building a relationship with my client, where they feel comfortable and confident in these beautiful moments.',
+  ],
   contactHeading: "Let's talk about your shoot.",
   contactCopy:
     'For bookings, collaborations, or questions, send an email and Samuel will get back to you.',
