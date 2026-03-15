@@ -593,7 +593,9 @@ export function PortfolioExperience({
               <h2 id="about-heading">{siteConfig.aboutHeading}</h2>
             </div>
             <div className={styles.aboutCopy}>
-              <p>{siteConfig.aboutBody}</p>
+              {siteConfig.aboutBody.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
             </div>
           </div>
         </section>
