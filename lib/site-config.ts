@@ -14,48 +14,12 @@ export type PricingCategory = {
   mode?: 'tiers' | 'reference';
 };
 
-export type BookingPackage = {
+type BookingPackage = {
   title: string;
   duration?: string;
   price: string;
   depositDue?: string;
   features: string[];
-  honeyBookUrl?: string;
-};
-
-export type BookingSection = {
-  id: string;
-  label: string;
-  heading: string;
-  intro: string;
-  mode?: 'packages' | 'reference' | 'inquiry';
-  packages?: BookingPackage[];
-  note?: string;
-  actionLabel?: string;
-  referenceLabel?: string;
-  referenceHref?: string;
-};
-
-export type BookingConfig = {
-  navLabel: string;
-  pageTitle: string;
-  intro: string;
-  supporting: string;
-  packageButtonLabel: string;
-  fallbackCopy: string;
-  fallbackButtonLabel: string;
-  policiesHeading: string;
-  policies: string[];
-  sections: BookingSection[];
-  customInquiry: {
-    id: string;
-    label: string;
-    heading: string;
-    body: string;
-    buttonLabel: string;
-    honeyBookUrl?: string;
-    fallbackCopy: string;
-  };
 };
 
 export type SiteConfig = {
@@ -85,7 +49,6 @@ export type SiteConfig = {
     ctaLabel: string;
     ctaHref: string;
   };
-  booking: BookingConfig;
   aboutHeading: string;
   aboutBody: string[];
   contactHeading: string;
@@ -293,79 +256,8 @@ export const siteConfig: SiteConfig = {
       },
     ],
     policies: sharedPricingPolicies,
-    ctaLabel: 'View booking options',
-    ctaHref: '/book',
-  },
-  booking: {
-    navLabel: 'Book',
-    pageTitle: 'Book a Session',
-    intro: 'Review the packages below, then book or inquire to reserve your date.',
-    supporting:
-      'Standard, graduation, engagement, maternity, and event options are listed below. Events and custom concepts begin with an inquiry so the coverage and deliverables stay aligned from the start.',
-    packageButtonLabel: 'Book now',
-    fallbackCopy:
-      'Online booking and inquiry links are being finalized. Email Samuel to reserve your date in the meantime.',
-    fallbackButtonLabel: 'Email Samuel instead',
-    policiesHeading: 'Booking policies',
-    policies: sharedPricingPolicies,
-    sections: [
-      {
-        id: 'standard',
-        label: 'Standard',
-        heading: 'Standard photoshoot packages',
-        intro:
-          'Tiered portrait packages for standard photoshoots with polished edits and every raw image included.',
-        packages: standardBookingPackages,
-      },
-      {
-        id: 'graduation',
-        label: 'Graduation',
-        heading: 'Graduation sessions',
-        intro:
-          'Graduation portraits use the same tier structure and pricing as the standard photoshoot packages.',
-        mode: 'reference',
-        note:
-          'Choose Tier 1, Tier 2, or Tier 3 from the standard photoshoot packages for graduation sessions.',
-        referenceLabel: 'View standard packages',
-        referenceHref: '#standard',
-      },
-      {
-        id: 'couples',
-        label: 'Couples',
-        heading: 'Engagement / couple photoshoot',
-        intro:
-          'Couple and engagement sessions with guided direction, polished edits, and all raw images included.',
-        packages: coupleBookingPackages,
-      },
-      {
-        id: 'events',
-        label: 'Events',
-        heading: 'Event coverage',
-        intro:
-          'Coverage is priced by the number of hours and delivered with lightly retouched final images.',
-        mode: 'inquiry',
-        actionLabel: 'Request event quote',
-        packages: eventBookingPackages,
-      },
-      {
-        id: 'maternity',
-        label: 'Maternity',
-        heading: 'Maternity shoot',
-        intro:
-          'Maternity sessions with flexible styling, high-end retouching, and all raw images included.',
-        packages: maternityBookingPackages,
-      },
-    ],
-    customInquiry: {
-      id: 'custom',
-      label: 'Custom',
-      heading: 'Need a custom project?',
-      body:
-        'For brand work, creative concepts, or anything outside the listed packages, start with an inquiry so Samuel can quote the right coverage, timing, and deliverables.',
-      buttonLabel: 'Request a custom quote',
-      fallbackCopy:
-        'Online inquiry links are being finalized. Email Samuel to start the conversation in the meantime.',
-    },
+    ctaLabel: 'Book your shoot',
+    ctaHref: '#contact',
   },
   aboutHeading: 'About Samuel',
   aboutBody: [
