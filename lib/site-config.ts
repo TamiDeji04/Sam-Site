@@ -16,6 +16,19 @@ export type SiteConfig = {
     title: string;
     body: string;
   }>;
+  pricing: {
+    sectionLabel: string;
+    heading: string;
+    intro: string;
+    tiers: Array<{
+      title: string;
+      price: string;
+      items: string[];
+    }>;
+    policies: string[];
+    ctaLabel: string;
+    ctaHref: string;
+  };
   aboutHeading: string;
   aboutBody: string[];
   contactHeading: string;
@@ -78,6 +91,37 @@ export const siteConfig: SiteConfig = {
         'You get a clean final set that is ready to share, publish, or keep.',
     },
   ],
+  pricing: {
+    sectionLabel: 'Pricing Preview',
+    heading: 'Simple rates for studio shoots',
+    intro:
+      'Clear pricing for basic studio sessions. Outdoor and lifestyle shoots are $50 less per tier.',
+    tiers: [
+      {
+        title: 'Tier 1',
+        price: '$300',
+        items: ['1 outfit', '4 high-end retouches', 'All raw images included'],
+      },
+      {
+        title: 'Tier 2',
+        price: '$550',
+        items: ['2 outfits', '8 high-end retouches', 'All raw images included'],
+      },
+      {
+        title: 'Tier 3',
+        price: '$850',
+        items: ['3 outfits', '12 high-end retouches', 'All raw images included'],
+      },
+    ],
+    policies: [
+      'Additional edits are $40 each.',
+      'Turnaround is 7 business days.',
+      'A 75% deposit is required at booking.',
+      'A $30 late fee applies if the client arrives late.',
+    ],
+    ctaLabel: 'Book your shoot',
+    ctaHref: '#contact',
+  },
   aboutHeading: 'About Samuel',
   aboutBody: [
     'My name is Samuel Oluwasanmi, I am a photographer. This passion for photography started when I was a teenager.',
