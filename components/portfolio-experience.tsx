@@ -585,6 +585,40 @@ export function PortfolioExperience({
               </article>
             ))}
           </div>
+          <section aria-labelledby="pricing-heading" className={styles.pricingPanel}>
+            <div className={styles.pricingHeader}>
+              <p className={styles.pricingLabel}>{siteConfig.pricing.sectionLabel}</p>
+              <h3 className={styles.pricingHeading} id="pricing-heading">
+                {siteConfig.pricing.heading}
+              </h3>
+              <p className={styles.pricingIntro}>{siteConfig.pricing.intro}</p>
+            </div>
+            <div className={styles.pricingGrid}>
+              {siteConfig.pricing.tiers.map((tier) => (
+                <article className={styles.pricingCard} key={tier.title}>
+                  <div className={styles.pricingCardHeader}>
+                    <h4>{tier.title}</h4>
+                    <p className={styles.pricingPrice}>{tier.price}</p>
+                  </div>
+                  <ul className={styles.pricingFeatures}>
+                    {tier.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+            <div className={styles.pricingFooter}>
+              <ul className={styles.policyList}>
+                {siteConfig.pricing.policies.map((policy) => (
+                  <li key={policy}>{policy}</li>
+                ))}
+              </ul>
+              <a className={styles.primaryButton} href={siteConfig.pricing.ctaHref}>
+                {siteConfig.pricing.ctaLabel}
+              </a>
+            </div>
+          </section>
         </section>
 
         <section aria-labelledby="about-heading" className={styles.section} id="about">
