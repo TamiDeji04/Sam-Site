@@ -495,6 +495,156 @@
   margin-top: 1rem;
 }
 
+.pricingPanel {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.pricingHeader {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 46rem;
+}
+
+.pricingLabel {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pricingHeading {
+  margin: 0;
+  font-family:
+    "Iowan Old Style",
+    "Palatino Linotype",
+    "Book Antiqua",
+    Georgia,
+    serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.pricingIntro {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.78;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.pricingCard,
+.pricingFooter {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 252, 246, 0.04)),
+    linear-gradient(180deg, rgba(92, 63, 42, 0.06), rgba(92, 63, 42, 0)),
+    var(--glass-panel);
+  backdrop-filter: blur(20px) saturate(142%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    var(--glass-shadow);
+}
+
+.pricingCard {
+  display: grid;
+  gap: 1.2rem;
+  padding: 1.55rem;
+}
+
+.pricingCardHeader {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.pricingCardHeader h4 {
+  margin: 0;
+  font-family:
+    "Iowan Old Style",
+    "Palatino Linotype",
+    "Book Antiqua",
+    Georgia,
+    serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.pricingPrice {
+  margin: 0;
+  font-family:
+    "Iowan Old Style",
+    "Palatino Linotype",
+    "Book Antiqua",
+    Georgia,
+    serif;
+  font-size: clamp(2.4rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+}
+
+.pricingFeatures {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.pricingFeatures li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+.pricingFeatures li::before {
+  content: '';
+  position: absolute;
+  top: 0.7rem;
+  left: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.pricingFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+}
+
+.policyList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.policyList li {
+  padding: 0.78rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(255, 252, 246, 0.44);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--text);
+  line-height: 1.45;
+}
+
 .serviceCard,
 .processCard,
 .aboutCard,
@@ -718,12 +868,18 @@
   .categoryGrid,
   .photoGrid,
   .serviceGrid,
-  .processGrid {
+  .processGrid,
+  .pricingGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .selectedCategoryCopy {
     text-align: left;
+  }
+
+  .pricingFooter {
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 }
 
@@ -761,7 +917,8 @@
   .categoryGrid,
   .photoGrid,
   .serviceGrid,
-  .processGrid {
+  .processGrid,
+  .pricingGrid {
     grid-template-columns: 1fr;
   }
 
@@ -790,5 +947,9 @@
 
   .footer {
     padding-bottom: 2rem;
+  }
+
+  .pricingFooter {
+    padding: 1rem;
   }
 }
