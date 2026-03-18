@@ -1,43 +1,3 @@
-export type BookingPackage = {
-  title: string;
-  duration: string;
-  price: string;
-  depositDue: string;
-  features: string[];
-  honeyBookUrl?: string;
-};
-
-export type BookingSection = {
-  id: string;
-  label: string;
-  heading: string;
-  intro: string;
-  packages: BookingPackage[];
-};
-
-export type BookingConfig = {
-  navLabel: string;
-  pageTitle: string;
-  intro: string;
-  supporting: string;
-  packageButtonLabel: string;
-  unavailableLabel: string;
-  fallbackCopy: string;
-  fallbackButtonLabel: string;
-  policiesHeading: string;
-  policies: string[];
-  sections: BookingSection[];
-  customInquiry: {
-    id: string;
-    label: string;
-    heading: string;
-    body: string;
-    buttonLabel: string;
-    honeyBookUrl?: string;
-    fallbackCopy: string;
-  };
-};
-
 export type SiteConfig = {
   businessName: string;
   fullName: string;
@@ -69,7 +29,6 @@ export type SiteConfig = {
     ctaLabel: string;
     ctaHref: string;
   };
-  booking: BookingConfig;
   aboutHeading: string;
   aboutBody: string[];
   contactHeading: string;
@@ -161,124 +120,7 @@ export const siteConfig: SiteConfig = {
       'A $30 late fee applies if the client arrives late.',
     ],
     ctaLabel: 'Book your shoot',
-    ctaHref: '/book',
-  },
-  booking: {
-    navLabel: 'Book',
-    pageTitle: 'Book a Session',
-    intro: 'Choose your session, reserve a time, and pay your booking deposit.',
-    supporting:
-      'Standard studio and outdoor packages are available for instant booking. Events and custom projects start with a quick inquiry so the scope stays right from the beginning.',
-    packageButtonLabel: 'Book now',
-    unavailableLabel: 'Coming soon',
-    fallbackCopy:
-      'Online booking links are being finalized. Email Samuel to reserve your date in the meantime.',
-    fallbackButtonLabel: 'Email Samuel instead',
-    policiesHeading: 'Booking policies',
-    policies: [
-      'A 75% deposit is due at booking.',
-      'The remaining 25% is invoiced after booking confirmation.',
-      'Turnaround is 7 business days.',
-      'Additional edits are $40 each.',
-      'A $30 late fee applies if the client arrives late.',
-      'Outdoor and lifestyle sessions are $50 less per tier.',
-    ],
-    sections: [
-      {
-        id: 'studio',
-        label: 'Studio Sessions',
-        heading: 'In-studio portrait packages',
-        intro:
-          'Directed studio sessions with clean lighting, polished retouching, and every raw image included.',
-        packages: [
-          {
-            title: 'Tier 1',
-            duration: '60-minute session',
-            price: '$300',
-            depositDue: '$225',
-            features: [
-              '1 outfit',
-              '4 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 2',
-            duration: '90-minute session',
-            price: '$550',
-            depositDue: '$412.50',
-            features: [
-              '2 outfits',
-              '8 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 3',
-            duration: '120-minute session',
-            price: '$850',
-            depositDue: '$637.50',
-            features: [
-              '3 outfits',
-              '12 high-end retouches',
-              'All raw images included',
-            ],
-          },
-        ],
-      },
-      {
-        id: 'outdoor',
-        label: 'Outdoor Sessions',
-        heading: 'On-location portrait packages',
-        intro:
-          'Lifestyle and outdoor sessions with the same tier structure, adjusted for location work and natural light.',
-        packages: [
-          {
-            title: 'Tier 1',
-            duration: '60-minute session',
-            price: '$250',
-            depositDue: '$187.50',
-            features: [
-              '1 outfit',
-              '4 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 2',
-            duration: '90-minute session',
-            price: '$500',
-            depositDue: '$375',
-            features: [
-              '2 outfits',
-              '8 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 3',
-            duration: '120-minute session',
-            price: '$800',
-            depositDue: '$600',
-            features: [
-              '3 outfits',
-              '12 high-end retouches',
-              'All raw images included',
-            ],
-          },
-        ],
-      },
-    ],
-    customInquiry: {
-      id: 'custom',
-      label: 'Custom Projects / Events',
-      heading: 'Need something more custom?',
-      body:
-        'For events, celebrations, brand work, or a custom concept, start with an inquiry so Samuel can quote the right coverage, timing, and deliverables.',
-      buttonLabel: 'Request a custom quote',
-      fallbackCopy:
-        'Online inquiry links are being finalized. Email Samuel to start the conversation in the meantime.',
-    },
+    ctaHref: '#contact',
   },
   aboutHeading: 'About Samuel',
   aboutBody: [
