@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import Link from 'next/link';
 import Image, { type StaticImageData } from 'next/image';
 import type { SiteConfig } from '@/lib/site-config';
 import styles from './portfolio-experience.module.css';
@@ -372,6 +373,7 @@ export function PortfolioExperience({
             <a href="#gallery">Gallery</a>
             <a href="#services">Services</a>
             <a href="#about">About</a>
+            <Link href="/book">{siteConfig.booking.navLabel}</Link>
             <a href="#contact">Contact</a>
           </nav>
         </header>
@@ -396,9 +398,9 @@ export function PortfolioExperience({
               <a className={styles.primaryButton} href="#gallery">
                 View gallery
               </a>
-              <a className={styles.secondaryButton} href="#contact">
-                Email Samuel
-              </a>
+              <Link className={styles.secondaryButton} href="/book">
+                Book a session
+              </Link>
             </div>
           </div>
         </section>
@@ -614,9 +616,9 @@ export function PortfolioExperience({
                   <li key={policy}>{policy}</li>
                 ))}
               </ul>
-              <a className={styles.primaryButton} href={siteConfig.pricing.ctaHref}>
+              <Link className={styles.primaryButton} href={siteConfig.pricing.ctaHref}>
                 {siteConfig.pricing.ctaLabel}
-              </a>
+              </Link>
             </div>
           </section>
         </section>
