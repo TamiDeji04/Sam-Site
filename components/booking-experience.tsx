@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { SiteConfig } from '@/lib/site-config';
+import type { BookingPackage, BookingSection, SiteConfig } from '@/lib/site-config';
 import styles from './booking-experience.module.css';
 
 type BookingExperienceProps = {
@@ -8,8 +8,19 @@ type BookingExperienceProps = {
 
 export function BookingExperience({ siteConfig }: BookingExperienceProps) {
   const { booking } = siteConfig;
+  const firstBookableSection = booking.sections.find((section) => section.mode !== 'reference');
+  const getSectionActionLabel = (section: BookingSection) =>
+    section.mode === 'inquiry'
+      ? section.actionLabel ?? booking.customInquiry.buttonLabel
+      : booking.packageButtonLabel;
+  const getPackageActionUrl = (section: BookingSection, pkg: BookingPackage) =>
+    section.mode === 'inquiry'
+      ? booking.customInquiry.honeyBookUrl ?? pkg.honeyBookUrl
+      : pkg.honeyBookUrl;
   const hasUnavailablePackages = booking.sections.some((section) =>
-    section.packages.some((pkg) => !pkg.honeyBookUrl),
+    section.mode === 'reference'
+      ? false
+      : (section.packages ?? []).some((pkg) => !getPackageActionUrl(section, pkg)),
   );
   const showFallbackPanel = hasUnavailablePackages || !booking.customInquiry.honeyBookUrl;
 
@@ -25,9 +36,12 @@ export function BookingExperience({ siteConfig }: BookingExperienceProps) {
           </Link>
           <nav aria-label="Booking navigation" className={styles.nav}>
             <Link href="/">Home</Link>
-            <a href="#studio">Studio</a>
-            <a href="#outdoor">Outdoor</a>
-            <a href={`#${booking.customInquiry.id}`}>Custom</a>
+            {booking.sections.map((section) => (
+              <a href={`#${section.id}`} key={section.id}>
+                {section.label}
+              </a>
+            ))}
+            <a href={`#${booking.customInquiry.id}`}>{booking.customInquiry.label}</a>
           </nav>
         </header>
 
@@ -38,9 +52,11 @@ export function BookingExperience({ siteConfig }: BookingExperienceProps) {
             <p className={styles.heroIntro}>{booking.intro}</p>
             <p className={styles.heroSupporting}>{booking.supporting}</p>
             <div className={styles.heroActions}>
-              <a className={styles.primaryButton} href="#studio">
-                View studio sessions
-              </a>
+              {firstBookableSection ? (
+                <a className={styles.primaryButton} href={`#${firstBookableSection.id}`}>
+                  View packages
+                </a>
+              ) : null}
               <a
                 className={styles.secondaryButton}
                 href={`mailto:${siteConfig.email}`}
@@ -65,9 +81,12 @@ export function BookingExperience({ siteConfig }: BookingExperienceProps) {
         </section>
 
         {booking.sections.map((section) => {
-          const sectionHasUnavailablePackages = section.packages.some(
-            (pkg) => !pkg.honeyBookUrl,
-          );
+          const packages = section.packages ?? [];
+          const sectionActionLabel = getSectionActionLabel(section);
+          const sectionHasUnavailablePackages =
+            section.mode === 'reference'
+              ? false
+              : packages.some((pkg) => !getPackageActionUrl(section, pkg));
 
           return (
             <section
@@ -82,53 +101,70 @@ export function BookingExperience({ siteConfig }: BookingExperienceProps) {
                 <p>{section.intro}</p>
               </div>
 
-              <div className={styles.packageGrid}>
-                {section.packages.map((pkg) => (
-                  <article className={styles.packageCard} key={`${section.id}-${pkg.title}`}>
-                    <div className={styles.packageHeader}>
-                      <p className={styles.packageDuration}>{pkg.duration}</p>
-                      <h3>{pkg.title}</h3>
-                      <p className={styles.packagePrice}>{pkg.price}</p>
-                    </div>
+              {section.mode === 'reference' ? (
+                <article className={styles.referenceCard}>
+                  {section.note ? <p className={styles.referenceCopy}>{section.note}</p> : null}
+                  {section.referenceHref && section.referenceLabel ? (
+                    <a className={styles.secondaryButton} href={section.referenceHref}>
+                      {section.referenceLabel}
+                    </a>
+                  ) : null}
+                </article>
+              ) : (
+                <>
+                  <div className={styles.packageGrid}>
+                    {packages.map((pkg) => {
+                      const packageActionUrl = getPackageActionUrl(section, pkg);
 
-                    <div className={styles.depositPanel}>
-                      <p className={styles.depositLabel}>Deposit due today</p>
-                      <p className={styles.depositValue}>{pkg.depositDue}</p>
-                    </div>
+                      return (
+                        <article className={styles.packageCard} key={`${section.id}-${pkg.title}`}>
+                          <div className={styles.packageHeader}>
+                            {pkg.duration ? (
+                              <p className={styles.packageDuration}>{pkg.duration}</p>
+                            ) : null}
+                            <h3>{pkg.title}</h3>
+                            <p className={styles.packagePrice}>{pkg.price}</p>
+                          </div>
 
-                    <ul className={styles.featureList}>
-                      {pkg.features.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
+                          {pkg.depositDue ? (
+                            <div className={styles.depositPanel}>
+                              <p className={styles.depositLabel}>Deposit due today</p>
+                              <p className={styles.depositValue}>{pkg.depositDue}</p>
+                            </div>
+                          ) : null}
 
-                    <div className={styles.cardActions}>
-                      {pkg.honeyBookUrl ? (
-                        <a
-                          className={styles.primaryButton}
-                          href={pkg.honeyBookUrl}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          {booking.packageButtonLabel}
-                        </a>
-                      ) : (
-                        <button
-                          className={styles.disabledButton}
-                          disabled
-                          type="button"
-                        >
-                          {booking.unavailableLabel}
-                        </button>
-                      )}
-                    </div>
-                  </article>
-                ))}
-              </div>
+                          <ul className={styles.featureList}>
+                            {pkg.features.map((feature) => (
+                              <li key={feature}>{feature}</li>
+                            ))}
+                          </ul>
 
-              {sectionHasUnavailablePackages ? (
-                <p className={styles.sectionNote}>{booking.fallbackCopy}</p>
-              ) : null}
+                          <div className={styles.cardActions}>
+                            {packageActionUrl ? (
+                              <a
+                                className={styles.primaryButton}
+                                href={packageActionUrl}
+                                rel="noreferrer"
+                                target="_blank"
+                              >
+                                {sectionActionLabel}
+                              </a>
+                            ) : (
+                              <button className={styles.disabledButton} disabled type="button">
+                                {sectionActionLabel}
+                              </button>
+                            )}
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+
+                  {sectionHasUnavailablePackages ? (
+                    <p className={styles.sectionNote}>{booking.fallbackCopy}</p>
+                  ) : null}
+                </>
+              )}
             </section>
           );
         })}
@@ -179,7 +215,7 @@ export function BookingExperience({ siteConfig }: BookingExperienceProps) {
                   disabled
                   type="button"
                 >
-                  {booking.unavailableLabel}
+                  {booking.customInquiry.buttonLabel}
                 </button>
               )}
               <a

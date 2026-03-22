@@ -1,8 +1,24 @@
+export type PricingTier = {
+  title: string;
+  price: string;
+  items: string[];
+};
+
+export type PricingCategory = {
+  id: string;
+  label: string;
+  heading: string;
+  intro?: string;
+  tiers?: PricingTier[];
+  note?: string;
+  mode?: 'tiers' | 'reference';
+};
+
 export type BookingPackage = {
   title: string;
-  duration: string;
+  duration?: string;
   price: string;
-  depositDue: string;
+  depositDue?: string;
   features: string[];
   honeyBookUrl?: string;
 };
@@ -12,7 +28,12 @@ export type BookingSection = {
   label: string;
   heading: string;
   intro: string;
-  packages: BookingPackage[];
+  mode?: 'packages' | 'reference' | 'inquiry';
+  packages?: BookingPackage[];
+  note?: string;
+  actionLabel?: string;
+  referenceLabel?: string;
+  referenceHref?: string;
 };
 
 export type BookingConfig = {
@@ -21,7 +42,6 @@ export type BookingConfig = {
   intro: string;
   supporting: string;
   packageButtonLabel: string;
-  unavailableLabel: string;
   fallbackCopy: string;
   fallbackButtonLabel: string;
   policiesHeading: string;
@@ -60,11 +80,7 @@ export type SiteConfig = {
     sectionLabel: string;
     heading: string;
     intro: string;
-    tiers: Array<{
-      title: string;
-      price: string;
-      items: string[];
-    }>;
+    categories: PricingCategory[];
     policies: string[];
     ctaLabel: string;
     ctaHref: string;
@@ -83,6 +99,104 @@ export type SiteConfig = {
   seoTitle: string;
   seoDescription: string;
 };
+
+const sharedPricingPolicies = [
+  'Additional edits are $40 each.',
+  'Expected turnaround is 7 business days.',
+  'A 75% deposit is required at booking.',
+  'A $30 late fee applies if the client arrives late.',
+];
+
+const standardBookingPackages: BookingPackage[] = [
+  {
+    title: 'Tier 1',
+    price: '$300',
+    depositDue: '$225',
+    features: ['1 outfit', '4 high-end retouches', 'all raw images included'],
+  },
+  {
+    title: 'Tier 2',
+    price: '$550',
+    depositDue: '$412.50',
+    features: ['2 outfits', '8 high-end retouches', 'all raw images included'],
+  },
+  {
+    title: 'Tier 3',
+    price: '$850',
+    depositDue: '$637.50',
+    features: ['3 outfits', '12 high-end retouches', 'all raw images included'],
+  },
+];
+
+const coupleBookingPackages: BookingPackage[] = [
+  {
+    title: 'Tier 1',
+    price: '$400',
+    depositDue: '$300',
+    features: ['1 outfit', '5 high-end retouches', 'all raw images included'],
+  },
+  {
+    title: 'Tier 2',
+    price: '$600',
+    depositDue: '$450',
+    features: ['2 outfits', '8 high-end retouches', 'all raw images included'],
+  },
+  {
+    title: 'Tier 3',
+    price: '$800',
+    depositDue: '$600',
+    features: ['3 outfits', '12 high-end retouches', 'all raw images included'],
+  },
+];
+
+const eventBookingPackages: BookingPackage[] = [
+  {
+    title: 'Tier 1',
+    duration: '2 hours',
+    price: '$300',
+    features: ['30 lightly retouched images'],
+  },
+  {
+    title: 'Tier 2',
+    duration: '4 hours',
+    price: '$600',
+    features: ['50+ lightly retouched images'],
+  },
+  {
+    title: 'Tier 3',
+    duration: '7 hours',
+    price: '$1000',
+    features: ['100+ lightly retouched images'],
+  },
+];
+
+const maternityBookingPackages: BookingPackage[] = [
+  {
+    title: 'Tier 1',
+    price: '$350',
+    depositDue: '$262.50',
+    features: ['1 outfit', '4 high-end retouches', 'all raw images included'],
+  },
+  {
+    title: 'Tier 2',
+    price: '$650',
+    depositDue: '$487.50',
+    features: ['2 outfits', '8 high-end retouches', 'all raw images included'],
+  },
+  {
+    title: 'Tier 3',
+    price: '$900',
+    depositDue: '$675',
+    features: ['3 outfits', '12 high-end retouches', 'all raw images included'],
+  },
+];
+
+const toPricingTiers = (packages: BookingPackage[]): PricingTier[] =>
+  packages.map(({ title, price, features }) => ({
+    title,
+    price,
+    items: features,
+  }));
 
 export const siteConfig: SiteConfig = {
   businessName: 'Samshotit',
@@ -133,148 +247,121 @@ export const siteConfig: SiteConfig = {
     },
   ],
   pricing: {
-    sectionLabel: 'Pricing Preview',
-    heading: 'Simple rates for studio shoots',
+    sectionLabel: 'Pricing',
+    heading: 'Current session and event rates',
     intro:
-      'Clear pricing for basic studio sessions. Outdoor and lifestyle shoots are $50 less per tier.',
-    tiers: [
+      'Browse the current package options for standard portraits, graduation sessions, couples, maternity shoots, and event coverage.',
+    categories: [
       {
-        title: 'Tier 1',
-        price: '$300',
-        items: ['1 outfit', '4 high-end retouches', 'All raw images included'],
+        id: 'standard',
+        label: 'Standard',
+        heading: 'Standard photoshoot packages',
+        intro:
+          'Tiered portrait sessions with high-end retouching and all raw images included.',
+        tiers: toPricingTiers(standardBookingPackages),
       },
       {
-        title: 'Tier 2',
-        price: '$550',
-        items: ['2 outfits', '8 high-end retouches', 'All raw images included'],
+        id: 'graduation',
+        label: 'Graduation',
+        heading: 'Graduation sessions',
+        mode: 'reference',
+        note:
+          'Graduation sessions use the same Tier 1, Tier 2, and Tier 3 pricing as the standard photoshoot packages.',
       },
       {
-        title: 'Tier 3',
-        price: '$850',
-        items: ['3 outfits', '12 high-end retouches', 'All raw images included'],
+        id: 'couples',
+        label: 'Couples',
+        heading: 'Engagement / couple photoshoot',
+        intro:
+          'Couple portraits with guided direction, polished edits, and all raw images included.',
+        tiers: toPricingTiers(coupleBookingPackages),
+      },
+      {
+        id: 'events',
+        label: 'Events',
+        heading: 'Event coverage',
+        intro: 'Coverage priced by time with lightly retouched final image delivery.',
+        tiers: toPricingTiers(eventBookingPackages),
+      },
+      {
+        id: 'maternity',
+        label: 'Maternity',
+        heading: 'Maternity shoot',
+        intro:
+          'Maternity sessions with flexible styling, high-end retouching, and all raw images included.',
+        tiers: toPricingTiers(maternityBookingPackages),
       },
     ],
-    policies: [
-      'Additional edits are $40 each.',
-      'Turnaround is 7 business days.',
-      'A 75% deposit is required at booking.',
-      'A $30 late fee applies if the client arrives late.',
-    ],
-    ctaLabel: 'Book your shoot',
+    policies: sharedPricingPolicies,
+    ctaLabel: 'View booking options',
     ctaHref: '/book',
   },
   booking: {
     navLabel: 'Book',
     pageTitle: 'Book a Session',
-    intro: 'Choose your session, reserve a time, and pay your booking deposit.',
+    intro: 'Review the packages below, then book or inquire to reserve your date.',
     supporting:
-      'Standard studio and outdoor packages are available for instant booking. Events and custom projects start with a quick inquiry so the scope stays right from the beginning.',
+      'Standard, graduation, engagement, maternity, and event options are listed below. Events and custom concepts begin with an inquiry so the coverage and deliverables stay aligned from the start.',
     packageButtonLabel: 'Book now',
-    unavailableLabel: 'Coming soon',
     fallbackCopy:
-      'Online booking links are being finalized. Email Samuel to reserve your date in the meantime.',
+      'Online booking and inquiry links are being finalized. Email Samuel to reserve your date in the meantime.',
     fallbackButtonLabel: 'Email Samuel instead',
     policiesHeading: 'Booking policies',
-    policies: [
-      'A 75% deposit is due at booking.',
-      'The remaining 25% is invoiced after booking confirmation.',
-      'Turnaround is 7 business days.',
-      'Additional edits are $40 each.',
-      'A $30 late fee applies if the client arrives late.',
-      'Outdoor and lifestyle sessions are $50 less per tier.',
-    ],
+    policies: sharedPricingPolicies,
     sections: [
       {
-        id: 'studio',
-        label: 'Studio Sessions',
-        heading: 'In-studio portrait packages',
+        id: 'standard',
+        label: 'Standard',
+        heading: 'Standard photoshoot packages',
         intro:
-          'Directed studio sessions with clean lighting, polished retouching, and every raw image included.',
-        packages: [
-          {
-            title: 'Tier 1',
-            duration: '60-minute session',
-            price: '$300',
-            depositDue: '$225',
-            features: [
-              '1 outfit',
-              '4 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 2',
-            duration: '90-minute session',
-            price: '$550',
-            depositDue: '$412.50',
-            features: [
-              '2 outfits',
-              '8 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 3',
-            duration: '120-minute session',
-            price: '$850',
-            depositDue: '$637.50',
-            features: [
-              '3 outfits',
-              '12 high-end retouches',
-              'All raw images included',
-            ],
-          },
-        ],
+          'Tiered portrait packages for standard photoshoots with polished edits and every raw image included.',
+        packages: standardBookingPackages,
       },
       {
-        id: 'outdoor',
-        label: 'Outdoor Sessions',
-        heading: 'On-location portrait packages',
+        id: 'graduation',
+        label: 'Graduation',
+        heading: 'Graduation sessions',
         intro:
-          'Lifestyle and outdoor sessions with the same tier structure, adjusted for location work and natural light.',
-        packages: [
-          {
-            title: 'Tier 1',
-            duration: '60-minute session',
-            price: '$250',
-            depositDue: '$187.50',
-            features: [
-              '1 outfit',
-              '4 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 2',
-            duration: '90-minute session',
-            price: '$500',
-            depositDue: '$375',
-            features: [
-              '2 outfits',
-              '8 high-end retouches',
-              'All raw images included',
-            ],
-          },
-          {
-            title: 'Tier 3',
-            duration: '120-minute session',
-            price: '$800',
-            depositDue: '$600',
-            features: [
-              '3 outfits',
-              '12 high-end retouches',
-              'All raw images included',
-            ],
-          },
-        ],
+          'Graduation portraits use the same tier structure and pricing as the standard photoshoot packages.',
+        mode: 'reference',
+        note:
+          'Choose Tier 1, Tier 2, or Tier 3 from the standard photoshoot packages for graduation sessions.',
+        referenceLabel: 'View standard packages',
+        referenceHref: '#standard',
+      },
+      {
+        id: 'couples',
+        label: 'Couples',
+        heading: 'Engagement / couple photoshoot',
+        intro:
+          'Couple and engagement sessions with guided direction, polished edits, and all raw images included.',
+        packages: coupleBookingPackages,
+      },
+      {
+        id: 'events',
+        label: 'Events',
+        heading: 'Event coverage',
+        intro:
+          'Coverage is priced by the number of hours and delivered with lightly retouched final images.',
+        mode: 'inquiry',
+        actionLabel: 'Request event quote',
+        packages: eventBookingPackages,
+      },
+      {
+        id: 'maternity',
+        label: 'Maternity',
+        heading: 'Maternity shoot',
+        intro:
+          'Maternity sessions with flexible styling, high-end retouching, and all raw images included.',
+        packages: maternityBookingPackages,
       },
     ],
     customInquiry: {
       id: 'custom',
-      label: 'Custom Projects / Events',
-      heading: 'Need something more custom?',
+      label: 'Custom',
+      heading: 'Need a custom project?',
       body:
-        'For events, celebrations, brand work, or a custom concept, start with an inquiry so Samuel can quote the right coverage, timing, and deliverables.',
+        'For brand work, creative concepts, or anything outside the listed packages, start with an inquiry so Samuel can quote the right coverage, timing, and deliverables.',
       buttonLabel: 'Request a custom quote',
       fallbackCopy:
         'Online inquiry links are being finalized. Email Samuel to start the conversation in the meantime.',
