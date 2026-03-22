@@ -66,6 +66,7 @@ export function PortfolioExperience({
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const lightboxFrameRef = useRef<HTMLDivElement | null>(null);
   const lastFocusedElementRef = useRef<HTMLElement | null>(null);
+  const gallerySectionRef = useRef<HTMLElement | null>(null);
 
   const heroImage =
     images.find((image) => image.id === siteConfig.heroImageId) ?? images[0];
@@ -161,7 +162,21 @@ export function PortfolioExperience({
     }, galleryExitDurationMs);
   };
 
+  const scrollGalleryToTop = () => {
+    if (typeof window === 'undefined' || !gallerySectionRef.current) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    gallerySectionRef.current.scrollIntoView({
+      block: 'start',
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  };
+
   const openCategory = (label: string) => {
+    scrollGalleryToTop();
     transitionGalleryView(label);
   };
 
@@ -384,6 +399,7 @@ export function PortfolioExperience({
           aria-labelledby="gallery-heading"
           className={styles.section}
           id="gallery"
+          ref={gallerySectionRef}
         >
           <div className={styles.galleryHeader}>
             <div className={styles.sectionIntro}>
