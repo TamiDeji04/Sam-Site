@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { BookingExperience } from '@/components/booking-experience';
+import { PageScrollRestoration } from '@/components/page-scroll-restoration';
 import { siteConfig } from '@/lib/site-config';
 
 const bookingTitle = siteConfig.booking.pageTitle;
@@ -24,5 +25,10 @@ export const metadata: Metadata = {
 };
 
 export default function BookPage() {
-  return <BookingExperience siteConfig={siteConfig} />;
+  return (
+    <>
+      <PageScrollRestoration clearInitialHash />
+      <BookingExperience siteConfig={siteConfig} />
+    </>
+  );
 }

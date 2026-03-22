@@ -17,6 +17,7 @@
   --glass-panel: rgba(231, 219, 206, 0.28);
   --glass-panel-strong: rgba(231, 219, 206, 0.36);
   --glass-tint: rgba(92, 63, 42, 0.08);
+  --scroll-offset: 6.5rem;
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -27,7 +28,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6.5rem;
+  scroll-padding-top: var(--scroll-offset);
 }
 
 body {

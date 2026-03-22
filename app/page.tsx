@@ -1,3 +1,4 @@
+import { PageScrollRestoration } from '@/components/page-scroll-restoration';
 import { PortfolioExperience } from '@/components/portfolio-experience';
 import { portfolioImages } from '@/lib/portfolio-data';
 import { siteConfig } from '@/lib/site-config';
@@ -23,6 +24,7 @@ export default function Home() {
 
   return (
     <>
+      <PageScrollRestoration />
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),

@@ -229,31 +229,6 @@ export function PortfolioExperience({
     );
   };
 
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const previousScrollRestoration = window.history.scrollRestoration;
-    window.history.scrollRestoration = 'manual';
-
-    const resetScrollPosition = () => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'auto',
-      });
-    };
-
-    resetScrollPosition();
-    window.addEventListener('pageshow', resetScrollPosition);
-
-    return () => {
-      window.removeEventListener('pageshow', resetScrollPosition);
-      window.history.scrollRestoration = previousScrollRestoration;
-    };
-  }, []);
-
   useEffect(
     () => () => {
       clearGalleryTransitionTimer();
