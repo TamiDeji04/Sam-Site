@@ -78,6 +78,7 @@
 .heroCard,
 .noticeCard,
 .packageCard,
+.referenceCard,
 .policiesCard,
 .customCard {
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -273,6 +274,7 @@
 }
 
 .packageCard,
+.referenceCard,
 .customCard {
   display: grid;
   gap: 1.2rem;
@@ -357,6 +359,17 @@
   margin-top: auto;
 }
 
+.referenceCard {
+  max-width: 42rem;
+  margin-top: 1.9rem;
+}
+
+.referenceCopy {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
 .sectionNote {
   max-width: 42rem;
 }
@@ -430,6 +443,7 @@
   .heroCard,
   .noticeCard,
   .packageCard,
+  .referenceCard,
   .policiesCard,
   .customCard {
     border-radius: 28px;

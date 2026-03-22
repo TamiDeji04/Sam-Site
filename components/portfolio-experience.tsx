@@ -595,20 +595,48 @@ export function PortfolioExperience({
               </h3>
               <p className={styles.pricingIntro}>{siteConfig.pricing.intro}</p>
             </div>
-            <div className={styles.pricingGrid}>
-              {siteConfig.pricing.tiers.map((tier) => (
-                <article className={styles.pricingCard} key={tier.title}>
-                  <div className={styles.pricingCardHeader}>
-                    <h4>{tier.title}</h4>
-                    <p className={styles.pricingPrice}>{tier.price}</p>
+            <div className={styles.pricingCategories}>
+              {siteConfig.pricing.categories.map((category) =>
+                category.mode === 'reference' ? (
+                  <article className={styles.pricingReferenceCard} key={category.id}>
+                    <div className={styles.pricingCategoryHeader}>
+                      <p className={styles.pricingCategoryLabel}>{category.label}</p>
+                      <h4 className={styles.pricingCategoryHeading}>{category.heading}</h4>
+                    </div>
+                    {category.note ? (
+                      <p className={styles.pricingCategoryNote}>{category.note}</p>
+                    ) : null}
+                  </article>
+                ) : (
+                  <div className={styles.pricingCategory} key={category.id}>
+                    <div className={styles.pricingCategoryHeader}>
+                      <p className={styles.pricingCategoryLabel}>{category.label}</p>
+                      <h4 className={styles.pricingCategoryHeading}>{category.heading}</h4>
+                      {category.intro ? (
+                        <p className={styles.pricingCategoryIntro}>{category.intro}</p>
+                      ) : null}
+                    </div>
+                    <div className={styles.pricingGrid}>
+                      {category.tiers?.map((tier) => (
+                        <article
+                          className={styles.pricingCard}
+                          key={`${category.id}-${tier.title}`}
+                        >
+                          <div className={styles.pricingCardHeader}>
+                            <h5>{tier.title}</h5>
+                            <p className={styles.pricingPrice}>{tier.price}</p>
+                          </div>
+                          <ul className={styles.pricingFeatures}>
+                            {tier.items.map((item) => (
+                              <li key={item}>{item}</li>
+                            ))}
+                          </ul>
+                        </article>
+                      ))}
+                    </div>
                   </div>
-                  <ul className={styles.pricingFeatures}>
-                    {tier.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
+                ),
+              )}
             </div>
             <div className={styles.pricingFooter}>
               <ul className={styles.policyList}>

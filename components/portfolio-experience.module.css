@@ -535,6 +535,51 @@
   line-height: 1.78;
 }
 
+.pricingCategories {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.pricingCategory {
+  display: grid;
+  gap: 1rem;
+}
+
+.pricingCategoryHeader {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 42rem;
+}
+
+.pricingCategoryLabel {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pricingCategoryHeading {
+  margin: 0;
+  font-family:
+    "Iowan Old Style",
+    "Palatino Linotype",
+    "Book Antiqua",
+    Georgia,
+    serif;
+  font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.pricingCategoryIntro,
+.pricingCategoryNote {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
 .pricingGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -542,6 +587,7 @@
 }
 
 .pricingCard,
+.pricingReferenceCard,
 .pricingFooter {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 30px;
@@ -561,12 +607,18 @@
   padding: 1.55rem;
 }
 
+.pricingReferenceCard {
+  display: grid;
+  gap: 1rem;
+  padding: 1.55rem;
+}
+
 .pricingCardHeader {
   display: grid;
   gap: 0.45rem;
 }
 
-.pricingCardHeader h4 {
+.pricingCardHeader h5 {
   margin: 0;
   font-family:
     "Iowan Old Style",
