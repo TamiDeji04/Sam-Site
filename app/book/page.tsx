@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { BookingExperience } from '@/components/booking-experience';
 import { siteConfig } from '@/lib/site-config';
 
-const bookingTitle = 'Book a Session';
+const bookingTitle = siteConfig.booking.pageTitle;
 const bookingDescription =
-  'Reserve a Samshotit studio or outdoor session, review package details, and pay the booking deposit online.';
+  'Review Samshotit package pricing for portraits, couples, maternity, and events, then book or inquire to reserve your date.';
 
 export const metadata: Metadata = {
   title: bookingTitle,
