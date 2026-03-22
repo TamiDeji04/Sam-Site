@@ -30,13 +30,13 @@ type PortfolioExperienceProps = {
 
 const galleryPanelId = 'gallery-panel';
 const galleryCategoryOrder = [
-  'Studio',
+  'Portrait',
   'Beauty',
   'Editorial',
-  'Portrait',
-  'Street',
-  'Celebration',
-  'Monochrome',
+  'Couples / Engagement',
+  'Maternity',
+  'Outdoor / Lifestyle',
+  'Events',
   'Landscape',
 ] as const;
 
