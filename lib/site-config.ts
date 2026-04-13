@@ -14,6 +14,12 @@ export type PricingCategory = {
   mode?: 'tiers' | 'reference';
 };
 
+export type PaymentMethod = {
+  id: string;
+  label: string;
+  handle: string;
+};
+
 export type BookingPackage = {
   title: string;
   duration?: string;
@@ -86,6 +92,9 @@ export type SiteConfig = {
     ctaHref: string;
   };
   booking: BookingConfig;
+  calendarEmbedUrl: string;
+  paymentMethods: PaymentMethod[];
+  depositNote: string;
   aboutHeading: string;
   aboutBody: string[];
   contactHeading: string;
@@ -103,7 +112,8 @@ export type SiteConfig = {
 const sharedPricingPolicies = [
   'Additional edits are $40 each.',
   'Expected turnaround is 7 business days.',
-  'A 75% deposit is required at booking.',
+  'A 50% non-refundable deposit is required to hold your spot.',
+  'You may reschedule up to 24 hours before your shoot.',
   'A $30 late fee applies if the client arrives late.',
 ];
 
@@ -111,19 +121,19 @@ const standardBookingPackages: BookingPackage[] = [
   {
     title: 'Tier 1',
     price: '$300',
-    depositDue: '$225',
+    depositDue: '$150',
     features: ['1 outfit', '4 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 2',
     price: '$550',
-    depositDue: '$412.50',
+    depositDue: '$275',
     features: ['2 outfits', '8 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 3',
     price: '$850',
-    depositDue: '$637.50',
+    depositDue: '$425',
     features: ['3 outfits', '12 high-end retouches', 'all raw images included'],
   },
 ];
@@ -132,19 +142,19 @@ const coupleBookingPackages: BookingPackage[] = [
   {
     title: 'Tier 1',
     price: '$400',
-    depositDue: '$300',
+    depositDue: '$200',
     features: ['1 outfit', '5 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 2',
     price: '$600',
-    depositDue: '$450',
+    depositDue: '$300',
     features: ['2 outfits', '8 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 3',
     price: '$800',
-    depositDue: '$600',
+    depositDue: '$400',
     features: ['3 outfits', '12 high-end retouches', 'all raw images included'],
   },
 ];
@@ -174,19 +184,19 @@ const maternityBookingPackages: BookingPackage[] = [
   {
     title: 'Tier 1',
     price: '$350',
-    depositDue: '$262.50',
+    depositDue: '$175',
     features: ['1 outfit', '4 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 2',
     price: '$650',
-    depositDue: '$487.50',
+    depositDue: '$325',
     features: ['2 outfits', '8 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 3',
     price: '$900',
-    depositDue: '$675',
+    depositDue: '$450',
     features: ['3 outfits', '12 high-end retouches', 'all raw images included'],
   },
 ];
@@ -367,6 +377,13 @@ export const siteConfig: SiteConfig = {
         'Online inquiry links are being finalized. Email Samuel to start the conversation in the meantime.',
     },
   },
+  calendarEmbedUrl: 'https://calendly.com/samshotit1/photography-session',
+  paymentMethods: [
+    { id: 'zelle', label: 'Zelle', handle: '(973) 836-9258' },
+    { id: 'cashapp', label: 'CashApp', handle: '$samshot1t' },
+  ],
+  depositNote:
+    'Send the non-refundable deposit shown above using your selected payment method, then tap Confirm.',
   aboutHeading: 'About Samuel',
   aboutBody: [
     'My name is Samuel Oluwasanmi, I am a photographer. This passion for photography started when I was a teenager.',
