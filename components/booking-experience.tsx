@@ -55,7 +55,7 @@ export function BookingExperience({ siteConfig }: BookingExperienceProps) {
                 className={styles.secondaryButton}
                 href={`mailto:${siteConfig.email}`}
               >
-                Email Samuel
+                Email Us
               </a>
             </div>
           </div>

@@ -141,20 +141,20 @@ const standardBookingPackages: BookingPackage[] = [
 const coupleBookingPackages: BookingPackage[] = [
   {
     title: 'Tier 1',
-    price: '$400',
-    depositDue: '$200',
+    price: '$500',
+    depositDue: '$250',
     features: ['1 outfit', '5 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 2',
-    price: '$600',
-    depositDue: '$300',
+    price: '$700',
+    depositDue: '$350',
     features: ['2 outfits', '8 high-end retouches', 'all raw images included'],
   },
   {
     title: 'Tier 3',
-    price: '$800',
-    depositDue: '$400',
+    price: '$900',
+    depositDue: '$450',
     features: ['3 outfits', '12 high-end retouches', 'all raw images included'],
   },
 ];
@@ -247,7 +247,7 @@ export const siteConfig: SiteConfig = {
       step: '02',
       title: 'Keep it natural',
       body:
-        'On the day, Samuel gives calm direction so the session never feels stiff.',
+        'On the day, we give calm direction so the session never feels stiff.',
     },
     {
       step: '03',
@@ -314,8 +314,8 @@ export const siteConfig: SiteConfig = {
       'Standard, graduation, engagement, maternity, and event options are listed below. Events and custom concepts begin with an inquiry so the coverage and deliverables stay aligned from the start.',
     packageButtonLabel: 'Book now',
     fallbackCopy:
-      'Online booking and inquiry links are being finalized. Email Samuel to reserve your date in the meantime.',
-    fallbackButtonLabel: 'Email Samuel instead',
+      'Online booking and inquiry links are being finalized. Email us to reserve your date in the meantime.',
+    fallbackButtonLabel: 'Email us instead',
     policiesHeading: 'Booking policies',
     policies: sharedPricingPolicies,
     sections: [
@@ -371,10 +371,10 @@ export const siteConfig: SiteConfig = {
       label: 'Custom',
       heading: 'Need a custom project?',
       body:
-        'For brand work, creative concepts, or anything outside the listed packages, start with an inquiry so Samuel can quote the right coverage, timing, and deliverables.',
+        'For brand work, creative concepts, or anything outside the listed packages, start with an inquiry so we can quote the right coverage, timing, and deliverables.',
       buttonLabel: 'Request a custom quote',
       fallbackCopy:
-        'Online inquiry links are being finalized. Email Samuel to start the conversation in the meantime.',
+        'Online inquiry links are being finalized. Email us to start the conversation in the meantime.',
     },
   },
   calendarEmbedUrl: 'https://calendly.com/samshotit1/photography-session',
@@ -384,7 +384,7 @@ export const siteConfig: SiteConfig = {
   ],
   depositNote:
     'Send the non-refundable deposit shown above using your selected payment method, then tap Confirm.',
-  aboutHeading: 'About Samuel',
+  aboutHeading: 'About Us',
   aboutBody: [
     'My name is Samuel Oluwasanmi, I am a photographer. This passion for photography started when I was a teenager.',
     'After discovering this passion of mine, I decided to hone my skills, and use it to help capture the best moments for others and myself.',
@@ -392,7 +392,7 @@ export const siteConfig: SiteConfig = {
   ],
   contactHeading: "Let's talk about your shoot.",
   contactCopy:
-    'For bookings, collaborations, or questions, send an email and Samuel will get back to you.',
+    'For bookings, collaborations, or questions, send an email and we will get back to you.',
   email: 'Samshotit@gmail.com',
   instagramLabel: '@sam.shot.it_',
   instagramUrl: 'https://www.instagram.com/sam.shot.it_?igsh=MTE5em5hdXFrNGlzaw==',

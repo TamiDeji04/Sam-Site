@@ -48,6 +48,14 @@ import Oluwasanmi_FreedomPort from '@/fav-pics/optimized/Oluwasanmi_FreedomPort.
 
 export const portfolioImages: PortfolioImage[] = [
   {
+    id: '31',
+    src: DSC09865_copy,
+    alt: 'Portrait with a clean silhouette and neutral styling.',
+    featured: false,
+    orientation: 'portrait',
+    label: 'Portrait',
+  },
+  {
     id: '01',
     src: img_103A0029_copy_2,
     alt: 'Portrait of a seated subject photographed with soft directional light.',
@@ -283,14 +291,6 @@ export const portfolioImages: PortfolioImage[] = [
     id: '30',
     src: DSC09837_copy,
     alt: 'Portrait-format image with polished styling and a quiet backdrop.',
-    featured: false,
-    orientation: 'portrait',
-    label: 'Portrait',
-  },
-  {
-    id: '31',
-    src: DSC09865_copy,
-    alt: 'Portrait with a clean silhouette and neutral styling.',
     featured: false,
     orientation: 'portrait',
     label: 'Portrait',

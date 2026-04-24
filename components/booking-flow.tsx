@@ -200,7 +200,7 @@ export function BookingFlow({
           <div className={styles.confirmedCard}>
             <h2 className={styles.stepTitle}>Booking submitted</h2>
             <p className={styles.stepDesc}>
-              Your confirmation email should be opening now. Samuel will follow
+              Your confirmation email should be opening now. We will follow
               up once the deposit is received.
             </p>
             <Link className={styles.secondaryButton} href="/book">
